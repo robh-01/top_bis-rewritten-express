@@ -16,11 +16,23 @@ app.get("/", (req, res) => {
 
 app.get("/about", (req, res) => {
   const filename = path.join(import.meta.dirname, "public", "about.html");
-  fs.readFile(filename, "utf-8")
-    .then((content) => {
-      res.send(content);
-    })
-    .catch((err) => {});
+
+  //using res.send()
+  // fs.readFile(filename, "utf-8")
+  //   .then((content) => {
+  //     res.send(content);
+  //   })
+  //   .catch((err) => {});
+
+  //using res.sendFile();
+  res.sendFile(filename, (err) => {
+    if (err) {
+      console.log("File sending unsuccessful");
+      console.log(err);
+    } else {
+      console.log("file sending successful");
+    }
+  });
 });
 
 app.get("/contact-me", (req, res) => {
